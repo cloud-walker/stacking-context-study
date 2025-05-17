@@ -21,4 +21,10 @@ export default defineConfig({
   strictTokens: true,
   jsxFramework: "react",
   jsxStyleProps: "minimal",
+  globalCss: {
+    ":root": {
+      color: "slate.50",
+      bg: "slate.950",
+    },
+  },
 });
