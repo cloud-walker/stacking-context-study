@@ -1,8 +1,8 @@
 import { styled } from "../styled-system/jsx";
 import { css } from "../styled-system/css";
-import { hstack } from "../styled-system/patterns";
 import { Popover, Portal } from "@ark-ui/react";
 import { ChevronRightIcon } from "lucide-react";
+import { Button } from "./modules/Button";
 
 export function App() {
   return (
@@ -14,21 +14,29 @@ export function App() {
         gridTemplateColumns: "auto 1fr",
         isolation: "isolate",
         position: "relative",
+        padding: "4",
+        zIndex: "revert-layer",
       }}
     >
-      <styled.aside css={{ border: "[1px solid]" }}>
-        <Popover.Root portalled>
-          <Popover.Trigger className={hstack()}>
-            Click Me
-            <Popover.Indicator>
-              <ChevronRightIcon />
-            </Popover.Indicator>
+      <styled.aside
+        css={{ borderWidth: "1", borderColor: "slate.600", padding: "4" }}
+      >
+        <Popover.Root portalled positioning={{ placement: "right-start" }}>
+          <Popover.Trigger asChild>
+            <Button>
+              Click Me
+              <Popover.Indicator>
+                <ChevronRightIcon />
+              </Popover.Indicator>
+            </Button>
           </Popover.Trigger>
           <Portal>
             <Popover.Positioner>
               <Popover.Content
                 className={css({
-                  border: "[1px solid]",
+                  borderWidth: "1",
+                  borderColor: "slate.600",
+
                   width: "60",
                   bg: "slate.900",
                 })}
@@ -44,9 +52,12 @@ export function App() {
         css={{
           bg: "slate.950",
           position: "relative",
+          borderWidth: "1",
+          borderColor: "slate.600",
+          padding: "4",
         }}
       >
-        main
+        <Button>Button for main</Button>
       </styled.main>
     </styled.div>
   );
