@@ -6,7 +6,7 @@ import {
   XIcon,
   ChevronRightIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { styled } from "../styled-system/jsx";
 import { Button } from "./modules/Button";
@@ -19,9 +19,13 @@ import {
 } from "./modules/Popover";
 import { css, cx } from "../styled-system/css";
 import { hstack } from "../styled-system/patterns";
+import { raise } from "./modules/raise";
 
 export function App() {
   const [panels, setPanels] = useState<number[]>([0]);
+  const panelsContainer = useRef<HTMLDivElement>(
+    document.querySelector("#panels") ?? raise("panels container not found")
+  );
   return (
     <styled.div
       css={{
@@ -73,7 +77,7 @@ export function App() {
         {panels.map((id) => {
           return (
             <FloatingPanel.Root key={id} open>
-              <Portal>
+              <Portal container={panelsContainer}>
                 <FloatingPanel.Positioner
                   className={css({
                     "&:has([data-topmost])": {

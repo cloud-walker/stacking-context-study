@@ -26,5 +26,8 @@ export default defineConfig({
       color: "slate.50",
       bg: "slate.950",
     },
+    "#containers, #panels": {
+      isolation: "isolate",
+    },
   },
 });
