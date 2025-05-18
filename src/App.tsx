@@ -28,7 +28,7 @@ export function App() {
       <styled.aside
         css={{ borderWidth: "1", borderColor: "slate.600", padding: "4" }}
       >
-        <PopoverRoot portal>
+        <PopoverRoot portal placement="right-start">
           <PopoverTrigger as={<Button />}>
             Click Me
             <PopoverIndicator>
