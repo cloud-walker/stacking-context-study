@@ -17,11 +17,11 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "./modules/Popover";
-import { css } from "../styled-system/css";
+import { css, cx } from "../styled-system/css";
 import { hstack } from "../styled-system/patterns";
 
 export function App() {
-  const [panels, setPanels] = useState<number[]>([]);
+  const [panels, setPanels] = useState<number[]>([0]);
   return (
     <styled.div
       css={{
@@ -74,17 +74,36 @@ export function App() {
           return (
             <FloatingPanel.Root key={id} open>
               <Portal>
-                <FloatingPanel.Positioner>
+                <FloatingPanel.Positioner
+                  className={css({
+                    "&:has([data-topmost])": {
+                      zIndex: "10",
+                    },
+                  })}
+                >
                   <FloatingPanel.Content
-                    className={css({
-                      bg: "slate.900",
-                      padding: "3",
-                      // position: "relative",
-                      zIndex: "var(--z-index)",
-                    })}
+                    className={cx(
+                      "group",
+                      css({
+                        bg: "slate.900",
+                        padding: "3",
+                        overflow: "auto",
+                      })
+                    )}
                   >
                     <FloatingPanel.DragTrigger>
-                      <FloatingPanel.Header className={hstack()}>
+                      <FloatingPanel.Header
+                        className={hstack({
+                          bg: "slate.700",
+                          marginBlockStart: "-3",
+                          marginInline: "-3",
+                          padding: "3",
+                          color: "slate.400",
+                          ".group[data-topmost] &": {
+                            color: "slate.50",
+                          },
+                        })}
+                      >
                         <FloatingPanel.Title
                           className={css({ fontWeight: "medium" })}
                         >
@@ -131,16 +150,17 @@ export function App() {
 
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
+                        height: "0.5",
                         width: "full",
                         bg: "slate.800",
+                        top: "0",
                       })}
                       axis="n"
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
                         height: "full",
-                        width: "1",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="e"
@@ -148,14 +168,14 @@ export function App() {
                     <FloatingPanel.ResizeTrigger
                       className={css({
                         height: "full",
-                        width: "1",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="w"
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
+                        height: "0.5",
                         width: "full",
                         bg: "slate.800",
                       })}
@@ -163,32 +183,32 @@ export function App() {
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
-                        width: "1",
+                        height: "0.5",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="ne"
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
-                        width: "1",
+                        height: "0.5",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="se"
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
-                        width: "1",
+                        height: "0.5",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="sw"
                     />
                     <FloatingPanel.ResizeTrigger
                       className={css({
-                        height: "1",
-                        width: "1",
+                        height: "0.5",
+                        width: "0.5",
                         bg: "slate.800",
                       })}
                       axis="nw"
